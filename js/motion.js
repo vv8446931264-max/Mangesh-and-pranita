@@ -112,6 +112,15 @@ const M = (() => {
     openCbs.splice(0).forEach(cb => { try { cb(); } catch (e) { console.error(e); } });
   }
 
+  /* ---- stillness: every top-level block that is off screen gets .still, which pauses all CSS animation
+     inside it (style.css). A running CSS animation anywhere makes the phone redo style/paint work every
+     frame, so the page should only ever pay for what the guest can see. ---- */
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('still', !e.isIntersecting)),
+      { rootMargin: '80px 0px' });
+    document.querySelectorAll('body > header, body > section, body > footer, body > .tcard').forEach(b => io.observe(b));
+  }
+
   return { reduced, touch, lite, E, clamp, lerp, tween, onView, splitText, onFrame, S, P, opened, markOpen,
            get isOpen() { return isOpen; } };
 })();
