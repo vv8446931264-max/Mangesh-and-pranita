@@ -61,34 +61,12 @@ h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:2.4rem;line-
 @keyframes cueBob{0%,100%{transform:translateY(-2px);opacity:.45}50%{transform:translateY(5px);opacity:1}}
 html.scrolled .scrollcue{opacity:0!important;pointer-events:none}
 
-/* ---------- Stepper ---------- */
-.stepper{position:relative;z-index:2;padding:0 0 12px}
-.steps{display:flex;position:relative;max-width:760px;margin:0 auto}
-.track{position:absolute;top:17px;height:2px;background:rgba(200,146,31,.3);border-radius:2px}
-.fill{height:100%;width:0;background:linear-gradient(90deg,#f4a300,#8b1e3f);border-radius:2px;transition:width .6s ease}
-.step{flex:1;position:relative;z-index:1;text-align:center;background:none;border:0;font:inherit;color:rgba(74,29,36,.5);cursor:pointer;padding:0 2px}
-.step .dot{width:36px;height:36px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;background:#fff;
-  border:1.5px solid rgba(200,146,31,.6);font:500 .74rem 'Jost',sans-serif;color:var(--maroon);transition:all .5s}
-.step.done .dot{background:#ffe3a3;border-color:var(--gold)}
-.step.active .dot{background:linear-gradient(135deg,#b8325a,#8b1e3f);color:#fff;border-color:#8b1e3f;animation:ping 2s infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 rgba(139,30,63,.45)}70%,100%{box-shadow:0 0 0 12px rgba(139,30,63,0)}}
-.step.active,.step.done{color:var(--deep)}
-.step b{display:block;font:400 .84rem/1.2 'Tiro Devanagari Marathi',serif}
-.step small{display:block;font-size:.62rem;letter-spacing:.1em;opacity:.8}
+/* Stepper rules live in css/timeline.css */
 
 /* ---------- Timeline card ---------- */
 .tcard{width:calc(100% - 28px);max-width:700px;margin:22px auto 0;padding:18px 12px 20px;border-radius:28px;
   background:linear-gradient(160deg,rgba(255,255,255,.88),rgba(255,247,232,.78));border:1px solid rgba(200,146,31,.4);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 26px 70px rgba(139,30,63,.16)}
-.stage{display:grid;position:relative;overflow:hidden;touch-action:pan-y;transition:height .5s cubic-bezier(.16,1,.3,1);perspective:1000px}
-.event{grid-area:1/1;align-self:start;position:relative;max-width:none;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  gap:14px;padding:26px 6px 6px;text-align:center;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(.16,1,.3,1),visibility 0s .5s}
-.event.active{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .6s .08s cubic-bezier(.16,1,.3,1),visibility 0s}
-.event>*:not(.ghost){opacity:0;transform:translate(calc(var(--dir,1)*46px),10px);filter:blur(6px)}
-.event.active>*:not(.ghost){animation:evIn .9s cubic-bezier(.2,.8,.2,1) forwards}
-.event.active>*:nth-child(3){animation-delay:.06s}.event.active>*:nth-child(4){animation-delay:.12s}
-.event.active>*:nth-child(5){animation-delay:.18s}.event.active>*:nth-child(6){animation-delay:.24s}
-@keyframes evIn{to{opacity:1;transform:none;filter:none}}
 .ghost{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);font:500 min(62vw,340px)/1 'Jost',sans-serif;
   color:rgba(200,146,31,.09);pointer-events:none;z-index:-1}
 .event .eyebrow{letter-spacing:.2em;line-height:1.8}
@@ -224,8 +202,6 @@ footer .nm{font:italic 500 3rem/1.2 'Cormorant Garamond',serif;margin-top:12px}
 .hero .when{margin-top:18px}
 
 /* ---------- small animation touches ---------- */
-.event.active .ghost{animation:ghostIn 1.4s cubic-bezier(.2,.8,.2,1)}
-@keyframes ghostIn{from{opacity:0;transform:translate(-50%,-50%) scale(.6)}}
 .count b.tk{animation:tk .5s cubic-bezier(.2,.8,.2,1)}
 @keyframes tk{from{opacity:0;transform:translateY(-40%)}}
 @keyframes shim{to{background-position:200% 0}}
@@ -342,9 +318,6 @@ html.locked .hero,html.locked .hero *{animation-play-state:paused!important}   /
 @keyframes grow{from{width:0}}
 .heroart{animation:fadeUp 1s .7s backwards}
 .cvbtn{animation:fadeUp 1s 1s backwards,btnGlow 2.6s 2s ease-in-out infinite alternate}
-.event>*:not(.ghost){opacity:1;transform:none;filter:none}
-.event.active>*:not(.ghost){animation:evIn .9s cubic-bezier(.2,.8,.2,1) backwards}
-@keyframes evIn{from{opacity:0;transform:translate(calc(var(--dir,1)*46px),10px);filter:blur(6px)}}
 
 /* The names: each line paints its own gradient (a gradient clipped through animated child elements can vanish on some phones),
    they are visible by default, and there is a plain-colour fallback where gradient text is unsupported. */
