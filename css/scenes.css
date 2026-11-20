@@ -1,1 +1,28 @@
-/* scenes.css: see MOTION.md for ownership */
+/* scenes.css: see MOTION.md for ownership (the four event scenes and the horse Namaskar in #heroArt) */
+
+/* a stopped scene freezes its CSS loops too (flames, petals, garlands), so hidden cards cost nothing */
+.scene.paused *,#heroArt.paused *{animation-play-state:paused!important}
+
+/* temple-lamp flames: an irregular, unhurried flicker rather than a fast strobe */
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick2 1.9s cubic-bezier(.45,0,.55,1) infinite}
+.flame.f2{animation-duration:1.45s;animation-delay:-.6s}
+.flame.f3{animation-duration:1.15s;animation-delay:-.3s}
+@keyframes flick2{
+  0%,100%{transform:scale(1,1) skewX(0)}
+  18%{transform:scale(.96,1.08) skewX(-3deg)}
+  37%{transform:scale(1.03,.95) skewX(2deg)}
+  55%{transform:scale(.97,1.11) skewX(4deg)}
+  76%{transform:scale(1.02,.97) skewX(-2deg)}
+}
+.glow{animation:glowP 2.6s cubic-bezier(.45,0,.55,1) infinite alternate}
+@keyframes glowP{from{opacity:.6}to{opacity:.95}}
+.sway{animation-timing-function:cubic-bezier(.45,0,.55,1)}
+
+/* the round counter and vow under the Saptapadi scene change with a short roll, not a text swap */
+#pcount{display:inline-block;min-width:.62em}
+#pvow{will-change:auto}
+
+/* reduced motion: a calm still frame; falling things are not drawn at all */
+@media (prefers-reduced-motion:reduce){
+  .petalf,.rosef,.ember{display:none}
+}
