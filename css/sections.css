@@ -15,6 +15,28 @@
 #cal .calrow:nth-child(2){transition-delay:.12s}#cal .calrow:nth-child(3){transition-delay:.24s}#cal .calrow:nth-child(4){transition-delay:.36s}
 #cal .calrow .btn{transition-delay:0s}
 
+/* ---------- bhojan / feast card ---------- */
+.bhojan-card{background:linear-gradient(160deg,rgba(255,247,232,.95),rgba(255,237,200,.88))!important;border:1.5px solid rgba(200,146,31,.4)!important;border-radius:20px}
+.bhojan-icon{margin:0 auto 8px}
+.bhojan-title{display:block;font:italic 500 1.65rem/1.2 'Cormorant Garamond',serif;color:var(--maroon);margin-bottom:2px}
+.bhojan-en{display:block;font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:var(--saffron);font-weight:600;margin-bottom:10px}
+.bhojan-time{display:block;font-size:.88rem;color:var(--maroon);opacity:.85;margin-bottom:10px}
+.bhojan-desc{font-size:.88rem;color:var(--maroon);line-height:1.6;margin:0}
+.bhojan-desc em{font-size:.82rem;opacity:.7;display:block;margin-top:4px}
+.bhojan-items{display:flex;justify-content:center;gap:14px;margin-top:14px;font-size:1.5rem}
+.bhojan-items .bi{display:inline-block;animation:bhojanBounce 2.4s ease-in-out infinite}
+.bhojan-items .bi:nth-child(2){animation-delay:.18s}
+.bhojan-items .bi:nth-child(3){animation-delay:.36s}
+.bhojan-items .bi:nth-child(4){animation-delay:.54s}
+.bhojan-items .bi:nth-child(5){animation-delay:.72s}
+@keyframes bhojanBounce{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.12)}}
+.bhojan-steam{position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:40px;pointer-events:none}
+.bhojan-steam::before,.bhojan-steam::after{content:'';position:absolute;bottom:0;width:3px;border-radius:50%;background:rgba(200,146,31,.18);animation:steamRise 2.6s ease-out infinite}
+.bhojan-steam::before{left:30%;height:22px;animation-delay:0s}
+.bhojan-steam::after{left:60%;height:18px;animation-delay:.9s}
+@keyframes steamRise{0%{opacity:.7;transform:translateY(0) scaleY(1)}100%{opacity:0;transform:translateY(-28px) scaleY(1.5)}}
+.still .bhojan-items .bi,.still .bhojan-steam::before,.still .bhojan-steam::after{animation-play-state:paused}
+
 /* ---------- venue map ---------- */
 .mapcard{transition:opacity .9s var(--ease-out),transform .9s var(--ease-out),box-shadow .3s}
 .mapcard.done{transition:transform .35s var(--ease-out),box-shadow .35s}
