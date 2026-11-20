@@ -34,20 +34,19 @@ h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:2.4rem;line-
   overflow:hidden;background:radial-gradient(ellipse at 50% 28%,#fffdf4 0%,#ffeccf 48%,#ffd2b8 100%);padding:84px 20px 86px}
 .hero::after{content:'';position:absolute;top:12px;right:12px;bottom:12px;left:12px;border:1.5px solid rgba(200,146,31,.55);pointer-events:none;border-radius:6px}
 .hero::before{content:'';position:absolute;top:19px;right:19px;bottom:19px;left:19px;border:1px solid rgba(200,146,31,.25);pointer-events:none;border-radius:4px}
-.mandala{position:absolute;top:44%;left:50%;width:min(130vw,980px);height:min(130vw,980px);transform:translate(-50%,-50%);opacity:.55;pointer-events:none}
+/* mandala (hero.js): .mandala takes pointer/scroll depth, .mdisc the entrance, the two SVG layers turn slowly */
+.mandala{position:absolute;top:44%;left:50%;width:min(130vw,980px);height:min(130vw,980px);margin:calc(min(130vw,980px) / -2) 0 0 calc(min(130vw,980px) / -2);opacity:.55;pointer-events:none}
 .mandala *{fill:none;stroke:#d9a441;stroke-width:.9;stroke-opacity:.6}
-.mandala .ra{animation:rotCW 160s linear infinite;transform-box:view-box;transform-origin:0 0}
-.mandala .rb{animation:rotCCW 120s linear infinite;transform-box:view-box;transform-origin:0 0}
+.mdisc,.mdisc svg{position:absolute;top:0;left:0;width:100%;height:100%}
+.mla{animation:rotCW 160s linear infinite}.mlb{animation:rotCCW 120s linear infinite}
 @keyframes rotCW{to{transform:rotate(360deg)}} @keyframes rotCCW{to{transform:rotate(-360deg)}}
 .toran{position:absolute;top:0;left:0;width:100%;height:96px;pointer-events:none;z-index:3}
 .hero>*:not(.mandala):not(.toran){position:relative;z-index:2}
 .ganesh{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 16px;font-size:.9rem;color:var(--maroon);opacity:0;animation:fadeUp 1.4s .2s forwards}
 .invite{margin-top:12px;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--deep);opacity:0;animation:fadeUp 1.4s .5s forwards}
-.names{background-image:linear-gradient(100deg,#8b1e3f,#c8501c 25%,#b8860b 50%,#c8501c 75%,#8b1e3f);background-size:200% auto;animation:shim 9s linear infinite;font-weight:500;font-style:italic;font-size:clamp(3.2rem,15vw,7rem);line-height:1.02;margin:16px 0 8px}
-.names span{display:block;opacity:0;filter:blur(14px);letter-spacing:.25em;animation:nameIn 2s cubic-bezier(.2,.8,.2,1) forwards}
-.names .b{animation-delay:.5s}
-.names .amp{font-size:.34em;letter-spacing:.2em;font-style:normal;-webkit-text-fill-color:var(--saffron);color:var(--saffron);animation-delay:.3s}
-@keyframes nameIn{to{opacity:1;filter:blur(0);letter-spacing:.02em}}
+.names{font-weight:500;font-style:italic;font-size:clamp(3.2rem,15vw,7rem);line-height:1.02;margin:16px 0 8px}
+.names>span{display:block}
+.names .amp{font-size:.34em;letter-spacing:.2em;font-style:normal;-webkit-text-fill-color:var(--saffron);color:var(--saffron)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .when{display:flex;align-items:center;gap:14px;margin-top:8px;letter-spacing:.26em;font-size:.7rem;text-transform:uppercase;font-weight:500;color:var(--maroon);
   opacity:0;animation:fadeUp 1.4s 1.6s forwards}
@@ -173,11 +172,14 @@ footer .nm{font:italic 500 3rem/1.2 'Cormorant Garamond',serif;margin-top:12px}
 
 /* ---------- Hero portrait: the couple under an arch, their names in the painted sky ---------- */
 .portrait-wrap{position:relative;margin:16px auto 0;container-type:inline-size;
-  width:min(100%,440px,calc((100vh - 230px) / 1.79));width:min(100%,440px,calc((100svh - 230px) / 1.79));min-width:min(100%,280px)}
+  width:min(100%,440px,calc((100vh - 272px) / 1.87));width:min(100%,440px,calc((100svh - 272px) / 1.87));min-width:min(100%,280px)}   /* fits the screen with room for the scroll cue */
 .portrait{position:relative;overflow:hidden;
   background:radial-gradient(ellipse at 50% 62%,#fffdf4 0%,#ffeccf 52%,#ffd2b8 100%);
-  border-radius:50% 50% 22px 22px / 20% 20% 22px 22px;border:1.5px solid rgba(200,146,31,.7);
+  border-radius:50% 50% 22px 22px / 20% 20% 22px 22px;border:1.5px solid rgba(200,146,31,.7)}
+/* the cream mat and shadow sit behind the portrait (so its unveil can clip it); hero.js draws the gold ring as an SVG arch */
+.portrait-wrap::before{content:'';position:absolute;top:0;right:0;bottom:0;left:0;z-index:-1;border-radius:50% 50% 22px 22px / 20% 20% 22px 22px;
   box-shadow:0 0 0 6px #fffaf0,0 0 0 7.5px rgba(200,146,31,.45),0 26px 60px rgba(139,30,63,.28)}
+.portrait-wrap.drawn::before{box-shadow:0 0 0 6px #fffaf0,0 26px 60px rgba(139,30,63,.28)}
 .portrait::before{content:'';display:block;aspect-ratio:100/36}   /* clear space above the couple, for the names */
 .portrait::after{content:'';position:absolute;top:24%;bottom:0;left:0;right:0;z-index:0;pointer-events:none;opacity:.95;   /* marigold garlands down both sides, in the theme colours */
   background:radial-gradient(circle,#e8730c 0 2.2px,#f4a300 2.6px 6.2px,transparent 6.8px) left 4% top 0/17px 17px repeat-y,radial-gradient(circle,#e8730c 0 2.2px,#f4a300 2.6px 6.2px,transparent 6.8px) right 4% top 0/17px 17px repeat-y;
@@ -186,87 +188,68 @@ footer .nm{font:italic 500 3rem/1.2 'Cormorant Garamond',serif;margin-top:12px}
 .ptxt{position:absolute;left:2%;right:2%;top:0;height:36%;padding-top:9%;height:36cqw;padding-top:9cqw;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:visible}
 .ptxt .invite{margin:0;font-size:.58rem;letter-spacing:.12em;max-width:96%;text-align:center}
 .ptxt .names{font-size:clamp(1.7rem,8vw,3.2rem);font-size:clamp(1.7rem,10.5cqw,3.2rem);margin:4px 0 0;white-space:nowrap}
-.ptxt .names span{display:inline}
+.ptxt .names>span{display:inline}
 .hero .when{margin-top:18px}
 
 /* ---------- small animation touches ---------- */
 @keyframes shim{to{background-position:200% 0}}
 
-/* ---------- Opening cover: carved palace doors; the tap swings them open into the invitation ---------- */
+/* ---------- Opening cover: carved palace doors; the tap swings them open into the invitation (choreography: cinematic.css) ---------- */
 html.locked,html.locked body{overflow:hidden}
 html.locked .hero,html.locked .hero *{animation-play-state:paused!important}   /* the cover reveals the hero from its first frame */
 .cover{position:fixed;top:0;right:0;bottom:0;left:0;z-index:500;overflow:hidden;overflow:clip;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;
   padding:calc(12px + env(safe-area-inset-top)) 16px calc(12px + env(safe-area-inset-bottom));text-align:center;color:#f3dcb0;
-  background:radial-gradient(ellipse at 50% 45%,#5a0f22 0%,#3a0714 55%,#1e030b 100%);transition:opacity .8s 2.6s}
-.cover::after{content:'';position:absolute;top:0;right:0;bottom:0;left:0;z-index:4;pointer-events:none;opacity:0;transition:opacity .8s 2s;   /* light floods out of the doorway */
-  background:radial-gradient(ellipse at 50% 50%,#fffdf4,#fff1d6 60%,#ffe2b4)}
-.cover.open::after{opacity:1}
+  background:radial-gradient(ellipse at 50% 45%,#5a0f22 0%,#3a0714 55%,#1e030b 100%)}
 .cover::before{content:'';position:absolute;top:0;right:0;bottom:-460px;left:0;z-index:1;pointer-events:none;opacity:.6;animation:dust 26s linear infinite;   /* slow rising gold dust */
   background-image:radial-gradient(1.4px 1.4px at 12% 18%,#ffe3a0,transparent),radial-gradient(1px 1px at 38% 62%,#ffd27a,transparent),
     radial-gradient(1.6px 1.6px at 71% 33%,#fff1c1,transparent),radial-gradient(1px 1px at 86% 78%,#ffd27a,transparent),radial-gradient(1.2px 1.2px at 54% 91%,#ffe3a0,transparent);
   background-size:230px 230px}
 @keyframes dust{to{transform:translateY(-460px)}}
-.cover.open{opacity:0;pointer-events:none}
 /* the photo is the closed doorway; only the two inner leaves (cut from the same photo) swing. --l/--r/--t/--b/--s: leaf box and seam, in % of the photo */
 .cvstage{--l:17.31;--r:82.77;--t:21.46;--b:87.95;--s:49.92;position:relative;flex:none;order:1;aspect-ratio:1184/1328;perspective:1400px;
-  transform-origin:calc(var(--s) * 1%) calc((var(--t) + var(--b)) / 2 * 1%);transition:scale 1.9s cubic-bezier(.5,0,.3,1) 1.6s;
+  transform-origin:calc(var(--s) * 1%) calc((var(--t) + var(--b)) / 2 * 1%);
   width:min(100vw,calc(max(220px,100vh - 400px) * 1184 / 1328));width:min(100vw,calc(max(220px,100svh - 400px) * 1184 / 1328))}
-.cover.open .cvstage{scale:1.65}
-.cvstage img{opacity:0;transition:opacity .8s}
+.cvstage img{opacity:0;transition:opacity .9s var(--ease-out)}
 .cvstage.ready img{opacity:1}
 .cvstage>img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%}
 .cvglow,.leaf{position:absolute;top:calc(var(--t) * 1%);height:calc((var(--b) - var(--t)) * 1%)}
 .cvglow{left:calc(var(--l) * 1%);width:calc((var(--r) - var(--l)) * 1%);   /* what waits behind the doors: the couple, in golden light */
   background:radial-gradient(ellipse at 50% 55%,transparent 38%,rgba(255,200,120,.35) 74%,rgba(120,40,10,.7)),url(../img/couple-cut.webp) 50% 100%/auto 94% no-repeat,radial-gradient(ellipse at 50% 62%,#fffdf4 0%,#ffeccf 52%,#ffd2b8 100%)}
-.cvglow{opacity:0;transition:opacity .3s .4s}               /* only lit once the doors start to part, so a slow photo never shows a bare glow */
-.cvglow::after{content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:radial-gradient(#fffbe8,#ffe2a6 55%,#ffc46b);transition:opacity 1.8s 1s}
-.cover.open .cvglow{opacity:1}
-.cover.open .cvglow::after{opacity:0}
-.leaf{overflow:hidden;transition:transform 2s cubic-bezier(.6,0,.25,1) .45s}
+.cvglow{opacity:0}               /* only lit once the doors start to part, so a slow photo never shows a bare glow */
+.cvglow::after{content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:radial-gradient(#fffbe8,#ffe2a6 55%,#ffc46b)}
+.leaf{overflow:hidden}
 .leaf.l{left:calc(var(--l) * 1%);width:calc((var(--s) - var(--l)) * 1%);transform-origin:0 50%}
 .leaf.r{left:calc(var(--s) * 1%);width:calc((var(--r) - var(--s)) * 1%);transform-origin:100% 50%}
 .leaf img{position:absolute;height:calc(100% * 100 / (var(--b) - var(--t)));top:calc(-100% * var(--t) / (var(--b) - var(--t)))}
 .leaf.l img{width:calc(100% * 100 / (var(--s) - var(--l)));left:calc(-100% * var(--l) / (var(--s) - var(--l)))}
 .leaf.r img{width:calc(100% * 100 / (var(--r) - var(--s)));left:calc(-100% * var(--s) / (var(--r) - var(--s)))}
-.leaf::after{content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:#120206;opacity:0;transition:opacity 2s .45s}   /* a leaf darkens as it turns away */
-.cover.open .leaf.l{transform:rotateY(84deg)}
-.cover.open .leaf.r{transform:rotateY(-84deg)}
-.cover.open .leaf::after{opacity:.7}
+.leaf::after{content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:#120206;opacity:0}   /* a leaf darkens as it turns away */
 .cvcard{display:contents}
-.cvtop,.cvbot{position:relative;z-index:2;transition:opacity .6s,transform .8s cubic-bezier(.6,0,.4,1)}
+.cvtop,.cvbot{position:relative;z-index:2}
 .cvtop{order:0}.cvbot{order:2}
-.cover.open .cvtop{opacity:0;transform:translateY(-16px)}
-.cover.open .cvbot{opacity:0;transform:translateY(16px)}
-.cvganesh{display:block;width:clamp(56px,16vw,92px);height:auto;margin:0 auto 4px;border-radius:50%;mix-blend-mode:screen;animation:gGlow 3.6s ease-in-out infinite alternate}
+.cvganesh{display:block;width:clamp(56px,16vw,92px);height:auto;margin:0 auto 4px;border-radius:50%;mix-blend-mode:screen}
 @keyframes gGlow{from{filter:brightness(.92)}to{filter:brightness(1.25)}}
 .cover .ganesh{color:#f4d58d;font-size:.8rem}
 .cvto{margin:6px 0 0;font-size:1.05rem;color:#ffd27a}
 .cover .invite{color:#e9cf9c;margin-top:0;font-size:.62rem}
-.cover .names{font-size:clamp(2.1rem,9.5vw,3.6rem);margin:4px 0 0;line-height:1.15;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));
-  background-image:linear-gradient(100deg,#b8862b,#f7e3a1 25%,#c99a3a 50%,#fff1c1 72%,#b8862b)}
-.cover .names span{display:inline}
+.cover .names{font-size:clamp(2.1rem,9.5vw,3.6rem);margin:4px 0 0;line-height:1.15;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.cover .names>span{display:inline}
 .cover .names .amp{display:inline-block;font-size:.62em;margin:0 .2em;-webkit-text-fill-color:#f4c542;color:#f4c542}
 .cover .when{justify-content:center;color:#f4c542;margin-top:4px}
 .cover .when i{background:#c99a3a}
-.cvbtn{display:inline-block;margin-top:14px;padding:13px 30px;border:0;border-radius:40px;cursor:pointer;position:relative;overflow:hidden;
+.cvbtn{display:inline-block;margin-top:14px;padding:13px 30px;border:0;border-radius:40px;cursor:pointer;position:relative;
   font:600 .74rem 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#4a0d1e;
   background:linear-gradient(135deg,#f7e3a1,#d4a64a 45%,#f3d98f 62%,#b5832a);
-  box-shadow:0 0 0 1px rgba(255,236,180,.6),0 10px 30px rgba(255,190,90,.25),0 0 40px rgba(255,190,90,.18);
-  opacity:0;animation:fadeUp 1s 1s forwards,btnGlow 2.6s 2s ease-in-out infinite alternate}
-.cvbtn::after{content:'';position:absolute;top:0;left:-70%;width:40%;height:100%;background:rgba(255,255,255,.55);transform:skewX(-25deg);animation:sheen 3.6s 1.6s infinite}
+  box-shadow:0 0 0 1px rgba(255,236,180,.65),0 10px 30px rgba(255,190,90,.28)}
 .cvbtn small{display:block;margin-top:3px;font:400 .88rem 'Tiro Devanagari Marathi',serif;letter-spacing:.04em;text-transform:none}
-@keyframes btnGlow{to{box-shadow:0 0 0 1px rgba(255,236,180,.85),0 10px 34px rgba(255,190,90,.42),0 0 64px rgba(255,190,90,.36)}}
-.cvpetal{position:absolute;left:50%;top:48%;width:11px;height:7px;border-radius:50%;z-index:3;pointer-events:none}
 /* laptops and landscape screens: the wide photo fills the screen and the invitation sits on the doors as a card */
 @media (min-aspect-ratio:11/10){
   .cvstage{--l:31.10;--r:69.38;--t:26.04;--b:87.35;--s:50.18;position:absolute;left:50%;top:50%;translate:-50% -50%;aspect-ratio:1672/941;
     width:max(100vw,calc(100vh * 1672 / 941));width:max(100vw,calc(100svh * 1672 / 941))}
   .cvcard{display:block;position:relative;z-index:2;width:min(92vw,460px);padding:22px 22px 26px;border-radius:22px;
     background:linear-gradient(160deg,rgba(74,10,28,.93),rgba(36,4,13,.95));border:1px solid rgba(244,197,66,.65);
-    box-shadow:0 0 0 6px rgba(58,7,20,.55),0 0 0 7px rgba(244,197,66,.3),0 30px 80px rgba(0,0,0,.55);transition:opacity .6s,transform .8s cubic-bezier(.6,0,.4,1)}
+    box-shadow:0 0 0 6px rgba(58,7,20,.55),0 0 0 7px rgba(244,197,66,.3),0 30px 80px rgba(0,0,0,.55)}
   .cover .names{font-size:clamp(2.1rem,3.6vw,2.9rem)}
-  .cover.open .cvcard{opacity:0;transform:scale(.94)}
-  .cover.open .cvtop,.cover.open .cvbot{opacity:1;transform:none}
 }
 @media (min-aspect-ratio:11/10) and (max-height:520px){.cvganesh{display:none}.cvcard{padding:12px 18px}.cover .names{font-size:2rem}.cvbtn{margin-top:8px}}
 /* now-playing chip beside the sound button */
@@ -305,22 +288,26 @@ html.locked .hero,html.locked .hero *{animation-play-state:paused!important}   /
 .heroart{animation:fadeUp 1s .7s backwards}
 .cvbtn{animation:fadeUp 1s 1s backwards,btnGlow 2.6s 2s ease-in-out infinite alternate}
 
-/* The names: each line paints its own gradient (a gradient clipped through animated child elements can vanish on some phones),
-   they are visible by default, and there is a plain-colour fallback where gradient text is unsupported. */
-.names,.names.goldtxt{background:none;animation:none;-webkit-text-fill-color:currentColor;color:var(--maroon)}
+/* The names: every LETTER is its own span (namesSplit in hero.js) and paints its own slice of the gradient
+   (--w: width of the whole line, --o: the letter's offset in it), so the line reads as one continuous gradient.
+   Nothing gradient-clipped has animated children (that can vanish on some phones), letters are visible by default
+   and only animate FROM hidden, and there is a plain-colour fallback where gradient text is unsupported. */
+.names,.names.goldtxt{background:none;animation:none;-webkit-text-fill-color:currentColor;color:var(--maroon);position:relative}
 .names{line-height:1.12}
-.names span{opacity:1;filter:none;letter-spacing:.02em;color:#8b1e3f;animation:nameIn 2s cubic-bezier(.2,.8,.2,1) backwards}
-.names .b{animation-delay:.5s}
-@keyframes nameIn{from{opacity:0;letter-spacing:.25em;transform:translateY(10px)}}
+.names span{opacity:1;filter:none;letter-spacing:.02em;color:#8b1e3f;background:none;animation:none}
+.names .sc{display:inline-block;position:relative;padding:.12em .14em .24em;margin:-.12em -.14em -.24em}   /* room for italic swashes and the tail of the g */
+.cover .names .sc{color:#f3d58a}
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
-  .names span{background-image:linear-gradient(100deg,#8b1e3f,#c8501c 25%,#b8860b 50%,#c8501c 75%,#8b1e3f);background-size:200% auto;
-    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-    animation:nameIn 2s cubic-bezier(.2,.8,.2,1) backwards,shim 9s linear infinite}
-  .cover .names span{background-image:linear-gradient(100deg,#b8862b,#f7e3a1 25%,#c99a3a 50%,#fff1c1 72%,#b8862b)}
+  .names .sc{background-image:linear-gradient(100deg,rgba(255,196,64,0) 36%,#ffc23d 47%,#ffe28a 50%,#ffc23d 53%,rgba(255,196,64,0) 64%),
+      linear-gradient(100deg,#8b1e3f,#c8501c 25%,#b8860b 50%,#c8501c 75%,#8b1e3f);
+    background-size:var(--w,8em) 100%;background-repeat:no-repeat,repeat-x;background-position:calc(var(--w,8em) * -2) 0,calc(var(--o,0px) * -1) 0;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .cover .names .sc{background-image:linear-gradient(100deg,rgba(255,255,255,0) 38%,rgba(255,253,240,.95) 50%,rgba(255,255,255,0) 62%),
+      linear-gradient(100deg,#b8862b,#f7e3a1 25%,#c99a3a 50%,#fff1c1 72%,#b8862b)}
 }
 /* "and" gets room of its own, clear of the tail of the g in Mangesh */
 .names .amp{display:block;margin:.35em 0 .1em;line-height:1.1;font-size:.5em;letter-spacing:0;font-style:normal;background-image:none;
-  -webkit-text-fill-color:var(--saffron);color:var(--saffron);animation:nameIn 2s cubic-bezier(.2,.8,.2,1) .3s backwards}
+  -webkit-text-fill-color:var(--saffron);color:var(--saffron)}
 .cover .names .amp{display:inline-block;margin:0 .2em;line-height:1;background-image:none;-webkit-text-fill-color:#f4c542;color:#f4c542}
 .ptxt .names{margin:4px 0 0}
 .ptxt .names .amp{display:inline-block;margin:0 .22em;font-size:.62em;line-height:1;letter-spacing:0;vertical-align:.12em}
@@ -341,14 +328,9 @@ html.failsafe .hero,html.failsafe .hero *{animation:none!important}
 @media (min-aspect-ratio:11/10){
   @supports not (aspect-ratio:1/1){.cvstage{height:max(calc(100vw * 941 / 1672),100vh)}}
 }
-@supports not (scale:1){
-  .cvstage{transition:transform 1.9s cubic-bezier(.5,0,.3,1) 1.6s}
-  .cover.open .cvstage{transform:scale(1.65)}
-}
 @media (min-aspect-ratio:11/10){
   @supports not (translate:1px){
-    .cvstage{transform:translate(-50%,-50%)}
-    .cover.open .cvstage{transform:translate(-50%,-50%) scale(1.65)}
+    .cvstage{transform:translate(-50%,-50%)}   /* cover.js adds this to the camera move */
   }
 }
 /* ---------- Couple showcase ---------- */
