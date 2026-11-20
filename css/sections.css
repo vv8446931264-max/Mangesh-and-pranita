@@ -54,7 +54,7 @@
 .cs-tilt{position:relative;width:min(100%,340px);margin:0 auto;transform-style:preserve-3d;will-change:auto}
 .cs-tilt.live{will-change:transform}
 .cs-tilt .cs-frame{width:100%}
-.cs-frame img{transform-origin:50% 40%}
+.cs-frame img{transform-origin:46% 20%}
 .cs-tilt.live .cs-frame img{animation:kb 28s var(--ease-in-out) infinite alternate}
 @keyframes kb{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.11) translate(-1.5%,-1.8%)}}
 .cs-glare{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;overflow:hidden}
