@@ -132,10 +132,6 @@ html.scrolled .scrollcue{opacity:0!important;pointer-events:none}
 .contact:active{transform:scale(.97)}
 .contact b{font:italic 500 1.35rem/1.25 'Cormorant Garamond',serif}
 .contact span{font:500 .92rem 'Jost',sans-serif;letter-spacing:.06em;color:var(--deep)}
-.count{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-.count div{min-width:76px;padding:16px 8px;border-radius:16px;border:1px solid rgba(200,146,31,.45);background:#fff;box-shadow:0 8px 20px rgba(139,30,63,.08);
-  font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(74,29,36,.7)}
-.count b{display:block;font:400 2.1rem/1.1 'Jost',sans-serif;color:var(--maroon);letter-spacing:0}
 footer{text-align:center;padding:48px 20px 110px;background:linear-gradient(#fff4e2,#ffdcc2)}
 .footer-couple{display:block;width:100px;height:auto;margin:0 auto 18px;border-radius:50%;border:2px solid rgba(200,146,31,.6);
   box-shadow:0 8px 24px rgba(139,30,63,.18);object-fit:cover;object-position:50% 20%}
@@ -166,10 +162,6 @@ footer .nm{font:italic 500 3rem/1.2 'Cormorant Garamond',serif;margin-top:12px}
   background:rgba(255,255,255,.96);padding:9px 14px;border-radius:14px;font-size:.7rem;color:rgba(74,29,36,.8);box-shadow:0 4px 14px rgba(0,0,0,.14)}
 .maptag b{display:block;font-size:.92rem;color:var(--maroon);line-height:1.25}
 .maptag .go{font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;white-space:nowrap;color:var(--maroon)}
-.mapcard .pulse{transform-box:fill-box;transform-origin:center;animation:pinP 2s ease-out infinite}
-@keyframes pinP{from{transform:scale(.3);opacity:.6}to{transform:scale(1.9);opacity:0}}
-.mapcard .route{stroke-dasharray:5 7;animation:routeD 1.3s linear infinite}
-@keyframes routeD{to{stroke-dashoffset:-24}}
 
 /* ---------- Sound button ---------- */
 .snd{position:fixed;right:calc(14px + env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom));z-index:300;width:50px;height:50px;border-radius:50%;border:1.5px solid rgba(139,30,63,.5);
@@ -178,10 +170,6 @@ footer .nm{font:italic 500 3rem/1.2 'Cormorant Garamond',serif;margin-top:12px}
 .snd .x{display:block}.snd.on .x{display:none}
 .snd .w{display:none}.snd.on .w{display:block}
 .snd.on{background:linear-gradient(135deg,#b8325a,#8b1e3f);color:#fff}
-.snd.hint::after{content:'Tap for sound';position:absolute;right:58px;top:50%;transform:translateY(-50%);white-space:nowrap;padding:5px 12px;border-radius:20px;
-  background:var(--maroon);color:#fff;font-size:.68rem;letter-spacing:.12em;animation:nudge 1.6s ease-in-out infinite}
-.snd.hint{animation:ping 2s infinite}
-@keyframes nudge{50%{transform:translate(-5px,-50%)}}
 
 /* ---------- Hero portrait: the couple under an arch, their names in the painted sky ---------- */
 .portrait-wrap{position:relative;margin:16px auto 0;container-type:inline-size;
@@ -202,8 +190,6 @@ footer .nm{font:italic 500 3rem/1.2 'Cormorant Garamond',serif;margin-top:12px}
 .hero .when{margin-top:18px}
 
 /* ---------- small animation touches ---------- */
-.count b.tk{animation:tk .5s cubic-bezier(.2,.8,.2,1)}
-@keyframes tk{from{opacity:0;transform:translateY(-40%)}}
 @keyframes shim{to{background-position:200% 0}}
 
 /* ---------- Opening cover: carved palace doors; the tap swings them open into the invitation ---------- */
