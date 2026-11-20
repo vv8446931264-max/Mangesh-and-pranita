@@ -670,6 +670,7 @@ const VOWS = ['Nourish and care for each other','Grow strong together','Share pr
 SCN.saptapadi = el => {
   const svg = el.querySelector('svg'), E = M.E;
   const CX = 200, CY = 226, RX = 122, RY = 31, LAP = 3.9, LAPS = 7, HOLD = 4.6, TOTAL = LAP*LAPS;
+  const TH0 = -.62;
   let petals = '';
   if (!M.reduced) for (let i=0;i<Kin.half(14);i++) petals += `<ellipse class="petalf" cx="${14+i*28*(M.lite ? 2 : 1)}" cy="0" rx="3.4" ry="6.6" fill="${['#ff7aa8','#ffb703','#ff8a2b','#fff'][i%4]}" style="animation-duration:${4+i%4}s;animation-delay:${-i*.7}s"/>`;
   /* flame tongues: [width, height, dx, colour, phase] drawn back to front */
@@ -798,7 +799,8 @@ SCN.saptapadi = el => {
 
     /* ---- the walk ---- */
     const amp = moving ? 24*ph(u, 0, .5)*(1 - ph(u, TOTAL - .6, TOTAL)) : 0;
-    const c1 = pose(gF, th, 'm', amp, time), c2 = pose(bF, th - .33, 'f', amp, time);
+    /* the rounds start and end at the front-right of the fire (TH0), so the couple never stand in front of it */
+    const c1 = pose(gF, th + TH0, 'm', amp, time), c2 = pose(bF, th - .33 + TH0, 'f', amp, time);
     const h1 = hand(gF, 'N'), h2 = hand(bF, 'N'), want = (c1 + c2) >= 0 ? L.front : L.back;
     const d = `M${h1[0]} ${h1[1]}Q${(h1[0] + h2[0])/2} ${(h1[1] + h2[1])/2 + 9} ${h2[0]} ${h2[1]}`;
     cloth.setAttribute('d', d); cloth2.setAttribute('d', d);
@@ -815,7 +817,7 @@ SCN.saptapadi = el => {
 
     /* ---- camera: eases closer through the seventh round and stays with the celebration ---- */
     const kz = env(u, LAP*(LAPS - 1) + .6, TOTAL - .6, TOTAL + HOLD - 1.5, TOTAL + HOLD - .1);
-    cam.set(1 + .17*kz, CX, lerp(150, 190, kz));
+    cam.set(1 + .17*kz, CX + 34*kz, lerp(150, 190, kz));
     prevU = u;
   };
   return runner(tick, {el, reset, still:TOTAL + 2.2, warm:3});

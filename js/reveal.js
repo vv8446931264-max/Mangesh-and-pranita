@@ -58,8 +58,10 @@
     head.style.transform = 'translate3d(' + (S.p * vw).toFixed(1) + 'px,0,0)';
   });
 
-  /* ---- 5. Parallax: `translate` (composes with other agents' transforms), only on-screen, <= 10 px ---- */
-  const par = [...document.querySelectorAll('.glass,.couple-showcase,.count,.contacts')]
+  /* ---- 5. Parallax: `translate` (composes with other agents' transforms), only on-screen, <= 10 px.
+     Desktop only: on phones moving these cards repaints them (one holds the animated welcome scene) every
+     frame of a scroll, which costs far more smoothness than a 10 px drift is worth (measured). ---- */
+  const par = M.touch ? [] : [...document.querySelectorAll('.glass,.couple-showcase,.count,.contacts')]
     .filter(el => !skip(el) && !inTl(el)).map(el => ({ el, top: 0, h: 0, cur: 0, amp: el.matches('.glass') ? 8 : 10 }));
   const measure = () => par.forEach(p => { const r = p.el.getBoundingClientRect(); p.top = r.top + scrollY - p.cur; p.h = r.height; });
   if (par.length) {
