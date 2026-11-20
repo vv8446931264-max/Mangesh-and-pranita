@@ -661,93 +661,162 @@ SCN.lagna = el => {
 };
 
 /* ===================================================================
-   4. SAAT PHERE: the couple walk seven rounds around the sacred fire (front view)
+   4. SAPTAPADI (सप्तपदी): the couple walk seven rounds around the sacred fire (front view). The fire is built of
+   tongues that each flicker on their own and throw embers; each round lights a diya with a small bloom and rolls
+   the counter and the vow; after the seventh a quiet celebration (sparkles, petals), the camera creeping closer.
    =================================================================== */
 const VOWS = ['Nourish and care for each other','Grow strong together','Share prosperity and wealth',
   'Build a home full of joy','Raise a loving family','Walk through life as one','Be friends for life'];
 SCN.saptapadi = el => {
-  const svg = el.querySelector('svg');
+  const svg = el.querySelector('svg'), E = M.E;
   const CX = 200, CY = 226, RX = 122, RY = 31, LAP = 3.9, LAPS = 7, HOLD = 4.6, TOTAL = LAP*LAPS;
-  const ember = Array.from({length:8},(_,i)=>`<circle class="ember" cx="${192+i*2.4}" cy="196" r="1.7" fill="#ffb300" style="--dx:${(i%2?1:-1)*(4+i)}px;animation-delay:${-i*.22}s"/>`).join('');
   let petals = '';
-  for (let i=0;i<14;i++) petals += `<ellipse class="petalf" cx="${14+i*28}" cy="0" rx="3.4" ry="6.6" fill="${['#ff7aa8','#ffb703','#ff8a2b','#fff'][i%4]}" style="animation-duration:${4+i%4}s;animation-delay:${-i*.7}s"/>`;
+  if (!M.reduced) for (let i=0;i<Kin.half(14);i++) petals += `<ellipse class="petalf" cx="${14+i*28*(M.lite ? 2 : 1)}" cy="0" rx="3.4" ry="6.6" fill="${['#ff7aa8','#ffb703','#ff8a2b','#fff'][i%4]}" style="animation-duration:${4+i%4}s;animation-delay:${-i*.7}s"/>`;
+  /* flame tongues: [width, height, dx, colour, phase] drawn back to front */
+  const TG = [[17, 62, -10, '#ff6a00', 0], [17, 64, 10, '#ff6a00', 1.7], [20, 76, 0, 'url(#phFl1)', 3.1], [13, 52, -4, '#ffc933', 4.4], [12, 48, 5, '#ffc933', 5.2], [9, 36, 0, '#fff3b0', 6.3]];
   svg.innerHTML = `
   <defs>
     <linearGradient id="phSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9b0"/><stop offset="1" stop-color="#ffb995"/></linearGradient>
     <linearGradient id="phFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6d6a4"/><stop offset="1" stop-color="#e9b77a"/></linearGradient>
     <radialGradient id="phSun"><stop offset="0" stop-color="#fff3c4" stop-opacity=".95"/><stop offset="1" stop-color="#fff3c4" stop-opacity="0"/></radialGradient>
     <radialGradient id="phFire"><stop offset="0" stop-color="#ffb23c" stop-opacity=".7"/><stop offset="1" stop-color="#ff7a00" stop-opacity="0"/></radialGradient>
+    <radialGradient id="phBloom"><stop offset="0" stop-color="#fff3b0" stop-opacity=".95"/><stop offset="1" stop-color="#ffb300" stop-opacity="0"/></radialGradient>
     <linearGradient id="phFl1" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff5a00"/><stop offset="1" stop-color="#ffb300"/></linearGradient>
   </defs>
-  <rect width="400" height="300" fill="url(#phSky)"/><circle cx="200" cy="120" r="100" fill="url(#phSun)"/>
+  <g data-l="cam">
+  <rect x="-10" y="-10" width="420" height="320" fill="url(#phSky)"/><circle cx="200" cy="120" r="100" fill="url(#phSun)"/>
   <path d="M0 0H70Q40 90 20 214H0Z" fill="#a3203f"/><path d="M400 0H330Q360 90 380 214H400Z" fill="#a3203f"/>
   <path d="M70 0Q40 90 20 214M330 0Q360 90 380 214" fill="none" stroke="#e8b84a" stroke-width="2.4"/>
   <path d="${scallops(400,22,10)}" fill="#c8501c" stroke="#e8b84a" stroke-width="2"/>
   <path d="M34 30Q110 62 200 30T366 30" fill="none" stroke="#f4a300" stroke-width="7" stroke-dasharray="0.1 8.4" stroke-linecap="round"/>
   ${[80,150,250,320].map((x,i)=>`<g><line x1="${x}" y1="24" x2="${x}" y2="${50+i%2*14}" stroke="#8b6b4a"/><circle cx="${x}" cy="${58+i%2*14}" r="9" fill="#ffd45e"/><circle cx="${x}" cy="${58+i%2*14}" r="16" fill="#ffd45e" opacity=".3" class="glow"/></g>`).join('')}
-  <path d="M0 200Q200 188 400 200V300H0Z" fill="url(#phFloor)"/>
+  <path d="M-10 200Q200 188 410 200V310H-10Z" fill="url(#phFloor)"/>
   <ellipse cx="${CX}" cy="${CY}" rx="${RX*1.3}" ry="${RY*1.45}" fill="rgba(255,255,255,.28)" stroke="#e8730c" stroke-width="1.6" stroke-dasharray="2 6" stroke-linecap="round"/>
   <ellipse cx="${CX}" cy="${CY}" rx="${RX}" ry="${RY}" fill="none" stroke="#c8921f" stroke-width="1.2" stroke-dasharray="1 5" stroke-linecap="round" opacity=".8"/>
   <ellipse cx="${CX}" cy="${CY+6}" rx="62" ry="14" fill="#a3203f" opacity=".3"/>
   <g data-l="back"></g>
   <g>
-    <circle cx="${CX}" cy="${CY-22}" r="62" fill="url(#phFire)" class="glow"/>
+    <circle data-l="fglow" cx="${CX}" cy="${CY-22}" r="62" fill="url(#phFire)"/>
     <path d="M168 ${CY-6}H232L240 ${CY+12}H160Z" fill="#7b3f1d" stroke="#c8921f" stroke-width="1.4"/>
     <ellipse cx="${CX}" cy="${CY-6}" rx="32" ry="6" fill="#4a2410"/>
     <path d="M178 ${CY-8}L222 ${CY-2}M222 ${CY-8}L178 ${CY-2}" stroke="#a0622a" stroke-width="5" stroke-linecap="round"/>
-    <path class="flame" d="M${CX} ${CY-4}C176 ${CY-24} 186 ${CY-44} ${CX} ${CY-72}C214 ${CY-44} 224 ${CY-24} ${CX} ${CY-4}Z" fill="url(#phFl1)"/>
-    <path class="flame f2" d="M${CX} ${CY-4}C184 ${CY-20} 192 ${CY-36} ${CX} ${CY-56}C208 ${CY-36} 216 ${CY-20} ${CX} ${CY-4}Z" fill="#ffc933"/>
-    <path class="flame f3" d="M${CX} ${CY-4}C192 ${CY-14} 195 ${CY-24} ${CX} ${CY-38}C205 ${CY-24} 208 ${CY-14} ${CX} ${CY-4}Z" fill="#fff3b0"/>
-    <g transform="translate(0 ${CY-196})">${ember}</g>
+    <g data-l="fire" transform="translate(${CX} ${CY-4})">${TG.map(g => `<path fill="${g[3]}"/>`).join('')}</g>
+    <g data-l="emb"></g>
   </g>
   <g data-l="front"></g>
-  <g data-l="petals" opacity="0">${petals}</g>`;
+  <g data-l="fx"></g>
+  <g data-l="petals" opacity="0">${petals}</g>
+  </g>`;
   const L = {}; svg.querySelectorAll('[data-l]').forEach(n => L[n.dataset.l] = n);
-  /* seven diyas around the fire, lit one by one */
+  const cam = Kin.camera(L.cam), tongues = [...L.fire.children];
+  const embers = Kin.pool(L.emb, Kin.half(16), i => mk('circle', {r:1.2 + (i % 3)*.35, fill:i % 2 ? '#ffb300' : '#ff8a1c'}));
+  const sparks = Kin.sparkles(L.fx, 16), hts = Kin.hearts(L.fx, 6);
+  /* seven diyas around the fire, lit one by one: each wakes with a small bloom of light */
   const diyas = Array.from({length:7}, (_,k) => {
     const th = k*2*Math.PI/7, x = CX - RX*1.2*Math.sin(th), y = CY + RY*1.28*Math.cos(th);
-    const g = mk('g', {class:'diya', transform:`translate(${x} ${y})`}, Math.cos(th) >= 0 ? L.front : L.back);
+    const g = mk('g', {transform:`translate(${x} ${y})`}, Math.cos(th) >= 0 ? L.front : L.back);
     g.innerHTML = `<path d="M-8 0Q0 9 8 0Z" fill="#c8501c"/><ellipse cx="0" cy="0" rx="8" ry="2.4" fill="#e8730c"/>
-      <g class="df"><circle cy="-8" r="9" fill="#ffd45e" opacity=".4"/><path class="flame f2" d="M0 -2C-3.4 -6 -1 -10 0 -14C1 -10 3.4 -6 0 -2Z" fill="#ffb300"/></g>`;
-    return g;
+      <circle data-p="bl" cy="-7" r="13" fill="url(#phBloom)" opacity="0"/>
+      <path data-p="fl" d="M0 -2C-3.4 -6 -1 -10 0 -14C1 -10 3.4 -6 0 -2Z" fill="#ffb300" opacity="0"/>
+      <path data-p="in" d="M0 -2.4C-1.6 -4.6 -.6 -6.4 0 -8.4C.6 -6.4 1.6 -4.6 0 -2.4Z" fill="#fff3b0" opacity="0"/>`;
+    const q = {}; g.querySelectorAll('[data-p]').forEach(n => q[n.dataset.p] = n);
+    return {g, x, y, q, t0:-99};
   });
   const gF = fig(L.back, P.pGroom, CX, CY+RY, 1.1), bF = fig(L.back, P.pBride, CX, CY+RY, 1.1);
   const cloth = mk('path', {fill:'none', stroke:'#e8730c', 'stroke-width':3, 'stroke-linecap':'round'}, L.front);
   const cloth2 = mk('path', {fill:'none', stroke:'#ffd23f', 'stroke-width':1.4, 'stroke-linecap':'round', 'stroke-dasharray':'3 3'}, L.front);
-  let prevLaps = 0;
-  const showLap = laps => { $('pcount').textContent = Math.min(laps+1,7); $('pvow').textContent = VOWS[Math.min(laps,6)]; };
-  const reset = () => { diyas.forEach(d => d.classList.remove('on')); showLap(0); };
+
+  /* ---- the counter and the vow roll over: the old text slides up and fades, the new one rises in ---- */
+  const cEl = $('pcount'), vEl = $('pvow'), shown = new Map();
+  const roll = (node, text, dur = 260) => {
+    if (shown.get(node) === text) return; const first = !shown.has(node); shown.set(node, text);
+    if (M.reduced || first || Kin.quiet || !node.animate){ node.textContent = text; return; }
+    node.getAnimations().forEach(a => a.cancel());
+    node.animate([{opacity:1, transform:'translateY(0)'}, {opacity:0, transform:'translateY(-9px)'}], {duration:dur*.8, easing:'cubic-bezier(.4,0,1,1)', fill:'forwards'}).onfinish = () => {
+      node.textContent = text; node.getAnimations().forEach(a => a.cancel());
+      node.animate([{opacity:0, transform:'translateY(10px)'}, {opacity:1, transform:'translateY(0)'}], {duration:dur*1.5, easing:'cubic-bezier(.16,1,.3,1)'});
+    };
+  };
+  const showLap = laps => { roll(cEl, String(Math.min(laps + 1, 7))); roll(vEl, VOWS[Math.min(laps, 6)]); };
+  let prevLaps, prevU, nE, nS;
+  const reset = () => { embers.clear(); sparks.clear(); hts.clear(); diyas.forEach(d => { d.t0 = -99; d.lit = false; }); prevLaps = 0; prevU = 0; nE = nS = 0; showLap(0); };
   reset();
   const pose = (f, th, kind, walkAmp, t) => {
     const c = Math.cos(th), s = Math.sin(th);
     let sx = -c; sx = Math.sign(sx||1) * Math.pow(Math.abs(sx), .7);
     f.x = CX - RX*s; f.y = CY + RY*c; f.s = .94 + .2*c; f.sx = sx; f.place();
-    const phz = th*RX/13, a = Math.sin(phz)*walkAmp;
+    const phz = th*RX/13, a = Math.sin(phz)*walkAmp, k = walkAmp/24;
     if (kind === 'm'){ T(f.r.legF, `rotate(${a} 0 -50)`); T(f.r.legB, `rotate(${-a} 0 -50)`); setArm(f.r,'F', -a*.8, 14); setArm(f.r,'N', 30, -10); }
-    else { T(f.r.footF, `translate(${Math.sin(phz)*7*(walkAmp/24)} ${-Math.max(0,Math.cos(phz))*2})`); T(f.r.footB, `translate(${-Math.sin(phz)*7*(walkAmp/24)} ${-Math.max(0,-Math.cos(phz))*2})`);
+    else { T(f.r.footF, `translate(${Math.sin(phz)*7*k} ${-Math.max(0,Math.cos(phz))*2})`); T(f.r.footB, `translate(${-Math.sin(phz)*7*k} ${-Math.max(0,-Math.cos(phz))*2})`);
       T(f.r.pallu, `rotate(${Math.sin(t*3+1)*4} -9 -84)`); setArm(f.r,'F', a*.7, 12); setArm(f.r,'N', -30, -10); }
-    T(f.r.body, `translate(0 ${-Math.abs(Math.sin(phz))*1.5*(walkAmp/24)})`);
+    const bob = -Math.abs(Math.sin(phz))*1.5*k;
+    if (f.setBody) f.setBody(0, bob, 0); else T(f.r.body, `translate(0 ${bob})`);
     const want = c >= 0 ? L.front : L.back;
     if (f.g.parentNode !== want) want.appendChild(f.g);
     return c;
   };
-  return runner(time => {
+  bodyRig(gF); bodyRig(bF);
+  const env = (t, a, b, c, d) => E.inOut(clamp((t - a)/(b - a))) * (1 - E.inOut(clamp((t - c)/(d - c))));
+
+  const tick = (time, dt) => {
     const u = time % (TOTAL+HOLD), moving = u < TOTAL;
     const th = moving ? 2*Math.PI*u/LAP : 2*Math.PI*LAPS;
-    const laps = Math.floor(th/(2*Math.PI) + 1e-6);
-    if (laps < prevLaps){ reset(); prevLaps = 0; }
+    const laps = Math.floor(th/(2*Math.PI) + 1e-6), cross = x => prevU < x && u >= x;
+    if (u < prevU) reset();
     if (laps > prevLaps){
-      prevLaps = laps; diyas[laps-1].classList.add('on'); Aud.fx('bell');
-      if (laps >= LAPS){ $('pcount').textContent = 7; $('pvow').textContent = 'सात फेरे • सात वचने • सात जन्मांची साथ'; Aud.fx('gong'); }
+      const jump = laps - prevLaps > 1;
+      for (let k = prevLaps; k < laps; k++){ diyas[k].t0 = jump ? time - 9 : time; diyas[k].lit = true; }
+      prevLaps = laps; Kin.sfx(laps >= LAPS ? 'gong' : 'bell');
+      if (!jump){ const d = diyas[laps - 1]; sparks.one(time, d.x, d.y - 12, .55, 1); }
+      if (laps >= LAPS){ roll(cEl, '7'); roll(vEl, 'सात फेरे • सात वचने • सात जन्मांची साथ'); }
       else showLap(laps);
     }
-    const amp = moving ? 24 : 0;
-    const c1 = pose(gF, th, 'm', amp, time), c2 = pose(bF, th-.33, 'f', amp, time);
-    /* the knot joining them: groom's hand to bride's hand */
-    const h1 = hand(gF,'N'), h2 = hand(bF,'N'), want = (c1+c2) >= 0 ? L.front : L.back;
-    const d = `M${h1[0]} ${h1[1]}Q${(h1[0]+h2[0])/2} ${(h1[1]+h2[1])/2+9} ${h2[0]} ${h2[1]}`;
+    const dim = 1 - ph(u, TOTAL+HOLD-1, TOTAL+HOLD);                 /* the lamps settle down before the next round begins */
+
+    /* ---- the sacred fire: tongues flicker independently, the whole fire grows a little with every round ---- */
+    const I = 1 + .07*Math.sin(time*2.1) + .05*Math.sin(time*5.3 + 1) + .035*Math.sin(time*9.1 + 2), grow = 1 + .03*Math.min(laps, 7) + .05*env(u, TOTAL-.2, TOTAL+.6, TOTAL+HOLD-2, TOTAL+HOLD-.4);
+    TG.forEach((g, i) => {
+      const w = g[0], ph0 = g[4], f = 1 + .13*Math.sin(time*(3.1 + i*.9) + ph0) + .07*Math.sin(time*(7.3 + i*1.3) + ph0*2), h = g[1]*f*grow*(.94 + .06*I), tx = g[2]*.5 + 5*Math.sin(time*(2.3 + i*.6) + ph0) + 2*Math.sin(time*6.1 + ph0);
+      const bx = g[2]*.4;
+      tongues[i].setAttribute('d', `M${(bx - w).toFixed(1)} 0C${(bx - w).toFixed(1)} ${(-h*.35).toFixed(1)} ${(bx + tx - w*.45).toFixed(1)} ${(-h*.66).toFixed(1)} ${(bx + tx).toFixed(1)} ${(-h).toFixed(1)}C${(bx + tx + w*.45).toFixed(1)} ${(-h*.66).toFixed(1)} ${(bx + w).toFixed(1)} ${(-h*.35).toFixed(1)} ${(bx + w).toFixed(1)} 0Z`);
+    });
+    L.fglow.setAttribute('opacity', (.55 + .35*(I - .85)/.3*1 + .1*Math.min(laps, 7)/7).toFixed(3)); T(L.fglow, `translate(${CX} ${CY-22}) scale(${(.96 + .1*(I - 1) + .02*laps).toFixed(3)}) translate(${-CX} ${-(CY-22)})`);
+    /* embers rise from the flames, wobbling, and go out */
+    if (time >= nE){ nE = time + .13 + Math.random()*.16; embers.spawn(time, {x:CX - 16 + Math.random()*32, y:CY - 22 - Math.random()*14, vx:(Math.random() - .5)*14, rise:50 + Math.random()*40, A:2 + Math.random()*4, w:2 + Math.random()*3, f:Math.random()*6, life:1.5 + Math.random()*1.2}); }
+    embers.tick(time, (p, k, age) => { T(p.el, `translate(${(p.x + p.vx*age + p.A*Math.sin(age*p.w + p.f)).toFixed(2)} ${(p.y - p.rise*(1 - Math.exp(-1.3*age))).toFixed(2)}) scale(${(1 - .7*k).toFixed(3)})`); p.el.setAttribute('opacity', (Math.min(1, k*8)*(1 - k)).toFixed(3)); });
+
+    /* ---- the diyas: a bloom of light, a flame that unfurls with a little overshoot, then a steady flicker ---- */
+    diyas.forEach((d, k) => {
+      if (!d.lit){ return; }
+      const a = time - d.t0, born = E.back(clamp(a/.6)), fl = (1 + .12*Math.sin(time*(5 + k*.7) + k) + .07*Math.sin(time*11 + k*2))*born*dim;
+      d.q.fl.setAttribute('opacity', clamp(a/.2)*dim); d.q.in.setAttribute('opacity', clamp(a/.3)*dim);
+      T(d.q.fl, `translate(${(1.2*Math.sin(time*3.1 + k)).toFixed(2)} 0) scale(${(.86*fl).toFixed(3)} ${(fl*(1 + .06*Math.sin(time*7 + k))).toFixed(3)})`);
+      T(d.q.in, `scale(${(.9*fl).toFixed(3)} ${(fl).toFixed(3)})`);
+      const bl = a < 1.2 ? Math.sin(Math.PI*clamp(a/1.2))*1.7 + .5 : .5 + .08*Math.sin(time*2 + k);
+      d.q.bl.setAttribute('opacity', (Math.min(1, bl)*.85*dim).toFixed(3)); T(d.q.bl, `scale(${(.4 + bl*.9).toFixed(3)})`);
+    });
+
+    /* ---- the walk ---- */
+    const amp = moving ? 24*ph(u, 0, .5)*(1 - ph(u, TOTAL - .6, TOTAL)) : 0;
+    const c1 = pose(gF, th, 'm', amp, time), c2 = pose(bF, th - .33, 'f', amp, time);
+    const h1 = hand(gF, 'N'), h2 = hand(bF, 'N'), want = (c1 + c2) >= 0 ? L.front : L.back;
+    const d = `M${h1[0]} ${h1[1]}Q${(h1[0] + h2[0])/2} ${(h1[1] + h2[1])/2 + 9} ${h2[0]} ${h2[1]}`;
     cloth.setAttribute('d', d); cloth2.setAttribute('d', d);
     if (cloth.parentNode !== want){ want.appendChild(cloth); want.appendChild(cloth2); }
-    L.petals.setAttribute('opacity', moving ? 0 : ph(u,TOTAL+.3,TOTAL+1.2)*(1-ph(u,TOTAL+HOLD-.9,TOTAL+HOLD)));
-  });
+    const joy = env(u, TOTAL + .3, TOTAL + 1, TOTAL + HOLD - 1.6, TOTAL + HOLD - .6);
+    Kin.face(gF, time, joy*.9); Kin.face(bF, time + 1.9, joy*.7);
+    Kin.sec(gF, dt); Kin.sec(bF, dt);
+
+    /* ---- after the seventh round: sparkles, drifting hearts and petals ---- */
+    L.petals.setAttribute('opacity', (moving ? 0 : ph(u, TOTAL+.3, TOTAL+1.2)*(1 - ph(u, TOTAL+HOLD-.9, TOTAL+HOLD))).toFixed(3));
+    if (cross(TOTAL + .15)){ Kin.sfx('chime'); sparks.burst(time, CX, CY - 70, 10, 48, .8); sparks.burst(time + .1, CX - 70, CY - 40, 6, 30, .6); sparks.burst(time + .18, CX + 70, CY - 40, 6, 30, .6); }
+    if (!moving && u > TOTAL + .6 && u < TOTAL + HOLD - 1 && time >= nS){ nS = time + .45; sparks.one(time, CX - 80 + Math.random()*160, CY - 90 + Math.random()*70, .5, 1); if (Math.random() < .5) hts.emit(time, CX - 20 + Math.random()*40, CY - 60, {rise:50, life:2.4, s:.7}); }
+    sparks.tick(time); hts.tick(time);
+
+    /* ---- camera: eases closer through the seventh round and stays with the celebration ---- */
+    const kz = env(u, LAP*(LAPS - 1) + .6, TOTAL - .6, TOTAL + HOLD - 1.5, TOTAL + HOLD - .1);
+    cam.set(1 + .17*kz, CX, lerp(150, 190, kz));
+    prevU = u;
+  };
+  return runner(tick, {el, reset, still:TOTAL + 2.2, warm:3});
 };
