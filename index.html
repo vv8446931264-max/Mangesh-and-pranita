@@ -68,6 +68,7 @@
     <g class="x"><path d="M16 9l5 6M21 9l-5 6"/></g>
     <g class="w"><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></g>
   </svg>
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
 </button>
 
 <!-- ===== Hero ===== -->
@@ -132,7 +133,7 @@
   <div class="eyebrow rv">The venue</div>
   <h2 class="rv" id="venueName" style="margin:12px 0 6px"></h2>
   <p class="rv" id="venueAddr" style="opacity:.8"></p>
-  <a class="mapcard rv" id="dir" target="_blank" rel="noopener" aria-label="Open the venue in Google Maps">
+  <a class="mapcard" data-own-reveal id="dir" target="_blank" rel="noopener" aria-label="Open the venue in Google Maps">
     <svg viewBox="0 0 400 240" role="img" aria-label="Map illustration showing the venue">
       <rect width="400" height="240" fill="#eef1dc"/>
       <path d="M0 0H140L120 70L0 90Z" fill="#e2ebc8"/><path d="M260 0H400V80L300 60Z" fill="#dfe9c4"/>
@@ -147,6 +148,7 @@
       <g id="mapLawn"></g>
       <g id="mapBld"></g>
       <g id="mapTrees"></g>
+      <path class="route-draw" pathLength="1" d="M24 214Q96 150 168 126T200 98" fill="none" stroke="#8b1e3f" stroke-width="3" stroke-linecap="round"/>
       <path class="route" d="M24 214Q96 150 168 126T200 98" fill="none" stroke="#8b1e3f" stroke-width="3" stroke-linecap="round"/>
       <g style="font:500 8.4px 'Jost',sans-serif;fill:#5f6b4a">
         <text x="16" y="170" transform="rotate(-4 16 170)" style="fill:#8a6a1c">Kadepur &#8211; Pusesawli Road</text>
@@ -155,9 +157,9 @@
       </g>
       <g transform="translate(200 98)">
         <circle class="pulse" r="15" fill="#8b1e3f" opacity=".4"/>
-        <ellipse cy="2" rx="8" ry="2.6" fill="rgba(0,0,0,.25)"/>
-        <path d="M0 0C-5 -10 -13 -17 -13 -27A13 13 0 1 1 13 -27C13 -17 5 -10 0 0Z" fill="#8b1e3f" stroke="#fff" stroke-width="1.6"/>
-        <circle cy="-27" r="5.2" fill="#fff"/>
+        <ellipse class="psh" cy="2" rx="8" ry="2.6" fill="rgba(0,0,0,.25)"/>
+        <g class="pin"><path d="M0 0C-5 -10 -13 -17 -13 -27A13 13 0 1 1 13 -27C13 -17 5 -10 0 0Z" fill="#8b1e3f" stroke="#fff" stroke-width="1.6"/>
+        <circle cy="-27" r="5.2" fill="#fff"/></g>
       </g>
       <g transform="translate(368 30)"><circle r="15" fill="#fff" opacity=".92"/><path d="M0 -11L4 3L0 0L-4 3Z" fill="#8b1e3f"/><text y="-17" text-anchor="middle" style="font:600 8px 'Jost';fill:#8b1e3f">N</text></g>
     </svg>
@@ -170,8 +172,11 @@
   <div class="eyebrow rv">Together forever</div>
   <h2 class="rv" style="margin:12px 0 22px">Our journey begins</h2>
   <div class="couple-showcase rv-scale">
-    <div class="cs-frame">
-      <img src="img/couple.webp" width="1024" height="1536" alt="Mangesh and Pranita" loading="lazy">
+    <div class="cs-tilt">
+      <div class="cs-frame">
+        <img src="img/couple.webp" width="1024" height="1536" alt="Mangesh and Pranita" loading="lazy">
+        <span class="cs-glare" aria-hidden="true"></span>
+      </div>
     </div>
     <p class="cs-quote mr">"दोन हृदयं, एक नवा प्रवास"</p>
     <p class="cs-quote-en">Two hearts, one new journey</p>
@@ -183,8 +188,8 @@
   <div class="eyebrow rv">Counting down</div>
   <p class="sub rv" id="cdText"></p>
   <div class="count rv">
-    <div><b id="d">0</b>Days</div><div><b id="h">00</b>Hours</div>
-    <div><b id="m">00</b>Minutes</div><div><b id="s">00</b>Seconds</div>
+    <div class="fc"><b class="flip" id="d">0</b><i>Days</i></div><div class="fc"><b class="flip" id="h">00</b><i>Hours</i></div>
+    <div class="fc"><b class="flip" id="m">00</b><i>Minutes</i></div><div class="fc"><b class="flip" id="s">00</b><i>Seconds</i></div>
   </div>
 </section>
 
@@ -192,14 +197,14 @@
 <section id="rsvp" class="tight">
   <h2 class="rv" style="margin:12px 0 18px">Wanna get in touch!</h2>
   <div class="contacts rv">
-    <a class="contact" data-wa="919768313578" href="https://wa.me/919768313578" target="_blank" rel="noopener" aria-label="Message Mangesh Nikam on WhatsApp"><b>Mangesh Nikam</b><span>+919768313578</span></a>
-    <a class="contact" data-wa="917039102620" href="https://wa.me/917039102620" target="_blank" rel="noopener" aria-label="Message Pranita Abhang on WhatsApp"><b>Pranita Abhang</b><span>+917039102620</span></a>
+    <a class="contact" data-wa="919768313578" href="https://wa.me/919768313578" target="_blank" rel="noopener" aria-label="Message Mangesh Nikam on WhatsApp"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 00-8.6 15.1L2 22l4.9-1.3A10 10 0 1012 2zm0 1.8a8.2 8.2 0 11-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0112 3.8zM8.6 7.4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.7-.1-.2 0-.4.1-.5l.4-.4.3-.4c.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4z"/></svg><b>Mangesh Nikam</b><span>+919768313578</span></a>
+    <a class="contact" data-wa="917039102620" href="https://wa.me/917039102620" target="_blank" rel="noopener" aria-label="Message Pranita Abhang on WhatsApp"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 00-8.6 15.1L2 22l4.9-1.3A10 10 0 1012 2zm0 1.8a8.2 8.2 0 11-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0112 3.8zM8.6 7.4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.7-.1-.2 0-.4.1-.5l.4-.4.3-.4c.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4z"/></svg><b>Pranita Abhang</b><span>+917039102620</span></a>
   </div>
-  <button class="btn rv" id="share" type="button">Share invitation</button>
+  <button class="btn rv" id="share" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg>Share invitation</button>
 </section>
 
 <footer>
-  <img class="footer-couple" src="img/couple.webp" width="120" height="180" alt="" loading="lazy">
+  <div class="ft-photo"><img class="footer-couple" src="img/couple.webp" width="120" height="180" alt="" loading="lazy"></div>
   <p class="mr" style="color:var(--maroon);max-width:420px;margin:auto">तरी आपण सर्वांनी सहकुटुंब-सहपरिवार उपस्थित राहावे ही नम्र विनंती.</p>
   <p style="opacity:.75;margin-top:6px">Your presence will make our celebration complete.</p>
   <div class="nm goldtxt" id="signoff"></div>
