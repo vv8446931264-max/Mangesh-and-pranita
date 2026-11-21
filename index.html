@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="mr" class="locked">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff4e2">
+<meta name="color-scheme" content="light only">
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no">
+<script>setTimeout(function(){ if(!window.__ok) document.documentElement.classList.add("failsafe"); },5000);</script>
+<title>शुभविवाह · Mangesh &amp; Pranita</title>
+<meta name="description" content="You are warmly invited! 12–13 December 2026 • Shree Datta Mangal Lawns, Kadegaon, Sangli. Tap to open your invitation.">
+<!-- link previews (WhatsApp, Facebook, Telegram, X): keep these at the top of <head>; preview.jpg stays well under WhatsApp's 300 KB -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mangesh &amp; Pranita · Wedding">
+<meta property="og:locale" content="en_IN">
+<meta property="og:title" content="शुभविवाह · Mangesh &amp; Pranita">
+<meta property="og:description" content="You are warmly invited! 12–13 December 2026 • Shree Datta Mangal Lawns, Kadegaon, Sangli. Tap to open your invitation.">
+<meta property="og:url" content="https://vv8446931264-max.github.io/Mangesh-and-pranita/">
+<meta property="og:image" content="https://vv8446931264-max.github.io/Mangesh-and-pranita/preview.jpg?v=4">
+<meta property="og:image:secure_url" content="https://vv8446931264-max.github.io/Mangesh-and-pranita/preview.jpg?v=4">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Illustration of Mangesh and Pranita in traditional Marathi wedding attire, with the wedding dates">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="शुभविवाह · Mangesh &amp; Pranita">
+<meta name="twitter:description" content="You are warmly invited! 12–13 December 2026 • Shree Datta Mangal Lawns, Kadegaon, Sangli. Tap to open your invitation.">
+<meta name="twitter:image" content="https://vv8446931264-max.github.io/Mangesh-and-pranita/preview.jpg?v=4">
+<link rel="image_src" href="https://vv8446931264-max.github.io/Mangesh-and-pranita/preview.jpg?v=4">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preload" as="image" href="img/doors-tall.webp" media="(max-aspect-ratio: 11/10)">
+<link rel="preload" as="image" href="img/doors-wide.webp" media="(min-aspect-ratio: 11/10)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Tiro+Devanagari+Marathi&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/scenes.css">
+<link rel="stylesheet" href="css/cinematic.css">
+<link rel="stylesheet" href="css/timeline.css">
+<link rel="stylesheet" href="css/scroll.css">
+<link rel="stylesheet" href="css/sections.css">
+</head>
+<body>
+<div class="cover" id="cover" role="dialog" aria-modal="true" aria-labelledby="cvNames">
+  <div class="cvstage" id="cvStage" aria-hidden="true">
+    <img alt=""><div class="cvglow"></div>
+    <div class="leaf l"><img alt=""></div><div class="leaf r"><img alt=""></div>
+    <i class="cvseam"></i><i class="cvbloom"></i>
+  </div>
+  <div class="cvcard">
+    <div class="cvtop">
+      <img class="cvganesh" src="img/ganesh.webp" width="420" height="420" alt="">
+      <div class="ganesh mr" id="cvDeities"></div>
+      <p class="cvto mr" id="cvTo" hidden></p>
+    </div>
+    <div class="cvbot">
+      <div class="invite">Wedding Invitation</div>
+      <h1 class="names serif goldtxt" id="cvNames"><span id="cvG"></span><span class="amp">&amp;</span><span class="b" id="cvB"></span></h1>
+      <div class="when"><i></i><span id="cvWhen"></span><i></i></div>
+      <button class="cvbtn" id="openBtn" type="button"><span class="cvshine" aria-hidden="true"></span>Open the invitation<small>निमंत्रण उघडा</small></button>
+    </div>
+  </div>
+</div>
+<div class="np" id="np" aria-live="polite"></div>
+<canvas id="dust"></canvas>
+<button class="snd hint" id="snd" type="button" aria-label="Turn sound on" aria-pressed="false">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/>
+    <g class="x"><path d="M16 9l5 6M21 9l-5 6"/></g>
+    <g class="w"><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></g>
+  </svg>
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+</button>
+
+<!-- ===== Hero ===== -->
+<header class="hero" id="hero">
+  <div class="mandala" id="mandala" aria-hidden="true"></div>
+  <svg class="toran" id="toran" aria-hidden="true"></svg>
+  <div class="ganesh mr" id="deities"></div>
+  <div class="portrait-wrap">
+    <i class="hglow" aria-hidden="true"></i>
+    <div class="portrait">
+      <img src="img/couple-cut.webp" width="1086" height="1448" alt="Illustration of Mangesh and Pranita in traditional Marathi attire against marigold garlands" fetchpriority="high">
+      <i class="hveil" aria-hidden="true"></i>
+    </div>
+    <div class="ptxt">
+      <div class="invite">Together with our families, we invite you</div>
+      <h1 class="names serif goldtxt"><span id="gName"></span><span class="amp">&amp;</span><span class="b" id="bName"></span></h1>
+    </div>
+  </div>
+  <div class="when"><i></i><span id="heroWhen"></span><i></i></div>
+  <a class="scrollcue" href="#hero" id="scrollCue" aria-label="Scroll down"><span>Scroll down</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+</header>
+
+<!-- ===== Invitation + Groom (above the timeline) ===== -->
+<section style="padding-bottom:20px">
+  <div class="glass rv">
+    <p class="mr" id="inviteMr" style="color:var(--maroon);max-width:480px;margin:auto"></p>
+    <!-- the couple ride in, meet and say Namaskar -->
+    <svg class="heroart" id="heroArt" viewBox="0 0 400 230" role="img" aria-label="The groom and bride arrive in their cars, meet in the middle and say Namaskar"></svg>
+    <div class="fam2">
+      <div><div class="label">Groom</div><div class="n" id="groom"></div><div id="groomFam"></div></div>
+      <div class="vr"></div>
+      <div><div class="label">Bride</div><div class="n" id="bride"></div><div id="brideFam"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Timeline: one card at a time ===== -->
+<section style="padding:30px 16px 0">
+  <h2 class="mr goldtxt rv" style="margin-top:0;line-height:1.7;padding:.12em 0 .05em">दोन दिवसांचा सोहळा</h2>
+</section>
+<div class="tcard rv" id="timeline">
+  <nav class="stepper" aria-label="Wedding events">
+    <div class="steps" id="steps"><div class="track" id="track"><div class="fill" id="fill"></div><i class="head" id="head" aria-hidden="true"></i></div></div>
+  </nav>
+  <div class="stage" id="events"></div>
+  <div class="nav">
+    <button class="btn" id="prev" type="button"><span class="ar">&larr;</span> Previous</button>
+    <button class="btn" id="next" type="button">Next <span class="ar">&rarr;</span></button>
+  </div>
+</div>
+
+<!-- ===== Save the date ===== -->
+<section class="tight">
+  <div class="eyebrow rv">Save the dates</div>
+  <h2 class="rv" style="margin:12px 0 22px">Add to your calendar</h2>
+  <div class="glass rv" style="padding:6px 20px"><div id="cal"></div></div>
+
+  <!-- Bhojan / Food card -->
+  <div class="glass bhojan-card rv" style="margin-top:22px;padding:22px 20px;text-align:center;position:relative;overflow:hidden">
+    <div class="bhojan-steam" aria-hidden="true"></div>
+    <div class="bhojan-icon" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="52" height="52"><circle cx="32" cy="34" r="22" fill="none" stroke="var(--saffron)" stroke-width="1.5" opacity=".5"/><ellipse cx="32" cy="34" rx="18" ry="8" fill="rgba(200,146,31,.12)"/><path d="M18 30c3-10 11-16 14-16s11 6 14 16" fill="none" stroke="var(--maroon)" stroke-width="2" stroke-linecap="round"/><path d="M22 34q5-3 10 0t10 0" fill="none" stroke="var(--saffron)" stroke-width="1.2" opacity=".7"/><circle cx="27" cy="29" r="1.5" fill="var(--saffron)"/><circle cx="37" cy="29" r="1.5" fill="var(--saffron)"/><circle cx="32" cy="27" r="1.5" fill="var(--maroon)" opacity=".6"/></svg>
+    </div>
+    <b class="bhojan-title">भोजन संभारंभ</b>
+    <span class="bhojan-en">Wedding Feast</span>
+    <span class="bhojan-time">
+      <svg viewBox="0 0 16 16" width="14" height="14" style="vertical-align:-2px;margin-right:3px"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 4.5V8l3 2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Sunday 13 December &bull; दुपारी 12 नंतर पूर्ण दिवस
+    </span>
+    <p class="bhojan-desc">महाराष्ट्रीयन पंगत &bull; शाकाहारी जेवणाची रेलचेल<br><em>A grand feast of Maharashtrian delicacies awaits you all day long!</em></p>
+    <div class="bhojan-items" aria-hidden="true">
+      <span class="bi">🍛</span><span class="bi">🥘</span><span class="bi">🍚</span><span class="bi">🍨</span><span class="bi">🧁</span>
+    </div>
+  </div>
+
+  <div class="rv" style="margin-top:22px">
+    <a class="btn solid" id="ics" download="wedding-events.ics">Add all (Apple / Outlook)</a>
+  </div>
+</section>
+
+<!-- ===== Venue ===== -->
+<section class="tight">
+  <div class="eyebrow rv">The venue</div>
+  <h2 class="rv" id="venueName" style="margin:12px 0 6px"></h2>
+  <p class="rv" id="venueAddr" style="opacity:.8"></p>
+  <a class="mapcard" data-own-reveal id="dir" target="_blank" rel="noopener" aria-label="Open the venue in Google Maps">
+    <svg viewBox="0 0 400 240" role="img" aria-label="Map illustration showing the venue">
+      <rect width="400" height="240" fill="#eef1dc"/>
+      <path d="M0 0H140L120 70L0 90Z" fill="#e2ebc8"/><path d="M260 0H400V80L300 60Z" fill="#dfe9c4"/>
+      <path d="M0 150L110 132L130 240H0Z" fill="#e6edcc"/><path d="M300 152L400 132V240H330Z" fill="#e0eac8"/>
+      <path d="M-10 196Q80 164 150 194T290 204T410 174" fill="none" stroke="#cfe5f5" stroke-width="18" stroke-linecap="round"/>
+      <path d="M-10 196Q80 164 150 194T290 204T410 174" fill="none" stroke="#b5d8ef" stroke-width="11" stroke-linecap="round"/>
+      <path d="M0 58Q90 68 160 108T330 98T400 120M70 0Q82 80 60 160T92 240M334 0Q322 70 346 150T330 240" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+      <path d="M-10 142Q120 112 200 120T410 98" fill="none" stroke="#d99a2b" stroke-width="13" stroke-linecap="round"/>
+      <path d="M-10 142Q120 112 200 120T410 98" fill="none" stroke="#ffd36b" stroke-width="9.5" stroke-linecap="round"/>
+      <path d="M-10 142Q120 112 200 120T410 98" fill="none" stroke="#fff3c4" stroke-width="1.2" stroke-dasharray="6 6"/>
+      <rect x="168" y="58" width="68" height="44" rx="9" fill="#cde6ae" stroke="#a7cc84" stroke-width="1.4"/>
+      <g id="mapLawn"></g>
+      <g id="mapBld"></g>
+      <g id="mapTrees"></g>
+      <path class="route-draw" pathLength="1" d="M24 214Q96 150 168 126T200 98" fill="none" stroke="#8b1e3f" stroke-width="3" stroke-linecap="round"/>
+      <path class="route" d="M24 214Q96 150 168 126T200 98" fill="none" stroke="#8b1e3f" stroke-width="3" stroke-linecap="round"/>
+      <g style="font:500 8.4px 'Jost',sans-serif;fill:#5f6b4a">
+        <text x="16" y="170" transform="rotate(-4 16 170)" style="fill:#8a6a1c">Kadepur &#8211; Pusesawli Road</text>
+        <text x="236" y="176">Hingangaon Budruk</text>
+        <text x="14" y="26">&#8592; Kadegaon</text><text x="338" y="116">Sangli &#8594;</text>
+      </g>
+      <g transform="translate(200 98)">
+        <circle class="pulse" r="15" fill="#8b1e3f" opacity=".4"/>
+        <ellipse class="psh" cy="2" rx="8" ry="2.6" fill="rgba(0,0,0,.25)"/>
+        <g class="pin"><path d="M0 0C-5 -10 -13 -17 -13 -27A13 13 0 1 1 13 -27C13 -17 5 -10 0 0Z" fill="#8b1e3f" stroke="#fff" stroke-width="1.6"/>
+        <circle cy="-27" r="5.2" fill="#fff"/></g>
+      </g>
+      <g transform="translate(368 30)"><circle r="15" fill="#fff" opacity=".92"/><path d="M0 -11L4 3L0 0L-4 3Z" fill="#8b1e3f"/><text y="-17" text-anchor="middle" style="font:600 8px 'Jost';fill:#8b1e3f">N</text></g>
+    </svg>
+    <span class="maptag"><span><b id="mapName"></b>Illustrated map &bull; tap to open the real one</span><span class="go">Directions &rarr;</span></span>
+  </a>
+</section>
+
+<!-- ===== Couple showcase ===== -->
+<section class="tight" style="padding-top:50px;padding-bottom:30px">
+  <div class="eyebrow rv">Together forever</div>
+  <h2 class="rv" style="margin:12px 0 22px">Our journey begins</h2>
+  <div class="couple-showcase rv-scale">
+    <div class="cs-tilt">
+      <div class="cs-frame">
+        <img src="img/couple.webp" width="1086" height="1448" alt="Mangesh and Pranita" loading="lazy">
+        <span class="cs-glare" aria-hidden="true"></span>
+      </div>
+    </div>
+    <p class="cs-quote mr">"दोन हृदयं, एक नवा प्रवास"</p>
+    <p class="cs-quote-en">Two hearts, one new journey</p>
+  </div>
+</section>
+
+<!-- ===== Countdown ===== -->
+<section class="tight">
+  <div class="eyebrow rv">Counting down</div>
+  <p class="sub rv" id="cdText"></p>
+  <div class="count rv">
+    <div class="fc"><b class="flip" id="d">0</b><i>Days</i></div><div class="fc"><b class="flip" id="h">00</b><i>Hours</i></div>
+    <div class="fc"><b class="flip" id="m">00</b><i>Minutes</i></div><div class="fc"><b class="flip" id="s">00</b><i>Seconds</i></div>
+  </div>
+</section>
+
+<!-- ===== RSVP ===== -->
+<section id="rsvp" class="tight">
+  <h2 class="rv" style="margin:12px 0 18px">Wanna get in touch!</h2>
+  <div class="contacts rv">
+    <a class="contact" data-wa="919768313578" href="https://wa.me/919768313578" target="_blank" rel="noopener" aria-label="Message Mangesh Nikam on WhatsApp"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 00-8.6 15.1L2 22l4.9-1.3A10 10 0 1012 2zm0 1.8a8.2 8.2 0 11-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0112 3.8zM8.6 7.4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.7-.1-.2 0-.4.1-.5l.4-.4.3-.4c.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4z"/></svg><b>Mangesh Nikam</b><span>+919768313578</span></a>
+    <a class="contact" data-wa="917039102620" href="https://wa.me/917039102620" target="_blank" rel="noopener" aria-label="Message Pranita Abhang on WhatsApp"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 00-8.6 15.1L2 22l4.9-1.3A10 10 0 1012 2zm0 1.8a8.2 8.2 0 11-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0112 3.8zM8.6 7.4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.7-.1-.2 0-.4.1-.5l.4-.4.3-.4c.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4z"/></svg><b>Pranita Abhang</b><span>+917039102620</span></a>
+  </div>
+  <button class="btn rv" id="share" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg>Share invitation</button>
+</section>
+
+<footer>
+  <div class="ft-photo"><img class="footer-couple" src="img/couple.webp" width="120" height="160" alt="" loading="lazy"></div>
+  <p class="mr" style="color:var(--maroon);max-width:420px;margin:auto">तरी आपण सर्वांनी सहकुटुंब-सहपरिवार उपस्थित राहावे ही नम्र विनंती.</p>
+  <p style="opacity:.75;margin-top:6px">Your presence will make our celebration complete.</p>
+  <div class="nm goldtxt" id="signoff"></div>
+  <p id="blessings" style="margin-top:14px;font-size:.88rem;opacity:.8"></p>
+  <p class="credits" id="credits" hidden></p>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/figures.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/reveal.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/welcome.js"></script>
+<script src="js/ambient.js"></script>
+<script src="js/cover.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

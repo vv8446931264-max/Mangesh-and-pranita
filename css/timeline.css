@@ -1,0 +1,69 @@
+/* ===================================================================
+   Timeline card: stepper, deck-of-cards stage, nav. See MOTION.md.
+   Card poses (transform/opacity) are driven by js/timeline.js; this file
+   holds the resting styles and the settle choreography.
+   =================================================================== */
+
+/* ---------- Stepper ---------- */
+.stepper{position:relative;z-index:2;padding:0 0 12px}
+.steps{display:flex;position:relative;max-width:760px;margin:0 auto}
+.track{position:absolute;top:17px;height:2px;background:rgba(200,146,31,.28);border-radius:2px}
+.fill{position:absolute;inset:0;border-radius:2px;background:linear-gradient(90deg,#f4a300,#e8730c 55%,#8b1e3f);clip-path:inset(0 100% 0 0)}
+/* the travelling spark: a tiny diya flame riding the end of the fill */
+.head{position:absolute;left:0;top:50%;width:0;height:0;pointer-events:none;will-change:transform}
+.head::before,.head::after{content:'';position:absolute;border-radius:50%;left:-7px;top:-7px;width:14px;height:14px}
+.head::before{background:radial-gradient(circle,#fff6d0 0 22%,#ffc933 45%,rgba(244,163,0,0) 72%);animation:flame 1.1s ease-in-out infinite alternate}
+.head::after{left:-16px;top:-16px;width:32px;height:32px;background:radial-gradient(circle,rgba(244,163,0,.38),rgba(244,163,0,0) 68%);animation:flameGlow 2.2s ease-in-out infinite alternate}
+@keyframes flame{from{transform:scale(.82,1.05)}to{transform:scale(1.08,.94)}}
+@keyframes flameGlow{from{opacity:.65;transform:scale(.85)}to{opacity:1;transform:scale(1.15)}}
+.tcard:not(.live) .head::before,.tcard:not(.live) .head::after,.tcard:not(.live) .step.active::before{animation-play-state:paused}
+
+.step{flex:1;position:relative;z-index:1;text-align:center;background:none;border:0;font:inherit;color:rgba(74,29,36,.5);cursor:pointer;padding:0 2px;
+  transition:color .6s var(--ease-out);-webkit-tap-highlight-color:transparent}
+/* ring pulse behind the active dot */
+.step::before{content:'';position:absolute;top:0;left:50%;width:36px;height:36px;margin-left:-18px;border-radius:50%;border:2px solid var(--maroon);opacity:0;pointer-events:none}
+.step.active::before{animation:ring 2.4s .7s var(--ease-out) infinite}
+@keyframes ring{0%{opacity:.55;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.7)}}
+.step .dot{position:relative;isolation:isolate;overflow:hidden;width:36px;height:36px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;background:#fff;
+  border:1.5px solid rgba(200,146,31,.6);font:500 .74rem 'Jost',sans-serif;color:var(--maroon);
+  transition:background-color .5s var(--ease-out),border-color .5s,color .4s .1s,transform .3s var(--ease-out)}
+.step:active .dot{transform:scale(.92)}
+/* fill sweep inside the active dot */
+.step .dot::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,#b8325a,#8b1e3f);transform:scale(0);border-radius:50%;
+  transition:transform .6s var(--ease-out)}
+.step.done .dot{background:#ffe3a3;border-color:var(--gold);animation:dotPop .7s var(--ease-spring)}
+.step.active .dot{color:#fff;border-color:#8b1e3f}
+.step.active .dot::before{transform:scale(1.05)}
+@keyframes dotPop{0%{transform:scale(.78)}100%{transform:scale(1)}}
+.step.active,.step.done{color:var(--deep)}
+.step b{display:block;font:400 .84rem/1.2 'Tiro Devanagari Marathi',serif}
+.step small{display:block;font-size:.62rem;letter-spacing:.1em;opacity:.8}
+
+/* ---------- Stage: a small deck of cards ---------- */
+.stage{display:grid;position:relative;overflow:hidden;touch-action:pan-y;perspective:1100px;perspective-origin:50% 35%;
+  transition:height .8s var(--ease-out);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+@media (hover:hover){.stage{cursor:grab}.stage.drag{cursor:grabbing}}
+.stage svg{-webkit-user-drag:none}
+.stage.mv .event{will-change:transform,opacity}
+.event{grid-area:1/1;align-self:start;position:relative;max-width:none;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  gap:14px;padding:26px 6px 6px;text-align:center;visibility:hidden;pointer-events:none}
+.event.active{pointer-events:auto}
+
+/* contents settle in after a button / key / step arrival: eyebrow, title, scene, text */
+.event.settle>*:not(.ghost){animation:evIn .9s var(--ease-out) backwards;animation-delay:calc(.12s + var(--k,0)*.085s)}
+@keyframes evIn{from{opacity:0;transform:translate3d(calc(var(--dir,1)*34px),14px,0)}}
+
+/* ---------- Prev / next ---------- */
+.nav .btn{display:inline-flex;align-items:center;gap:8px;transition:transform .35s var(--ease-out),opacity .45s var(--ease-out),background-color .3s,box-shadow .3s}
+.nav .btn .ar{display:inline-block;transition:transform .4s var(--ease-out)}
+.nav .btn:disabled{opacity:.28;pointer-events:none}
+@media (hover:hover){
+  .nav .btn:hover{transform:translateY(-2px)}
+  #prev:hover .ar{transform:translateX(-5px)}
+  #next:hover .ar{transform:translateX(5px)}}
+.nav .btn:active{transform:scale(.94);transition-duration:.1s}
+.nav .btn:focus-visible,.step:focus-visible{outline:2px solid var(--maroon);outline-offset:3px}
+
+@media (prefers-reduced-motion:reduce){
+  .event.settle>*:not(.ghost){animation:none!important}
+  .stage{transition:none}}
