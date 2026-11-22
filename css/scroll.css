@@ -1,0 +1,75 @@
+/* scroll.css: section reveals, ornament dividers, progress line (see MOTION.md).
+   Hidden states are gated by html.rvjs (added by reveal.js), so nothing hides without JS. */
+
+/* old plain gold line and its parallax class are replaced by the ornament */
+section::before{display:none}
+.prlx{transition:none;will-change:auto}
+
+/* ---- generic reveal: rise + soft settle (animation, so the resting state is the natural one) ---- */
+html.rvjs :is(.rv,.rv-left,.rv-right,.rv-scale):not([data-own-reveal]){transition:none;opacity:0;transform:none}
+html.rvjs :is(.rv,.rv-left,.rv-right,.rv-scale):not([data-own-reveal]).show{opacity:1;
+  animation:rvUp var(--d-l) var(--ease-out) var(--rv-d,0s) backwards}
+html.rvjs .rv-left.show:not([data-own-reveal]){animation-name:rvLeft}
+html.rvjs .rv-right.show:not([data-own-reveal]){animation-name:rvRight}
+html.rvjs .rv-scale.show:not([data-own-reveal]){animation-name:rvScale;animation-duration:1.3s}
+@keyframes rvUp{from{opacity:0;transform:translateY(24px)}}
+@keyframes rvLeft{from{opacity:0;transform:translateX(-30px)}}
+@keyframes rvRight{from{opacity:0;transform:translateX(30px)}}
+@keyframes rvScale{from{opacity:0;transform:translateY(18px) scale(.94)}}
+
+/* ---- cards: a soft clip opens to the rounded card, with a small rise (no transform on .mapcard: sections agent) ---- */
+html.rvjs :is(.glass,.tcard,.mapcard,.contacts).rv.show:not([data-own-reveal]){
+  animation:rvCard 1.25s var(--ease-out) var(--rv-d,0s) backwards}
+html.rvjs .mapcard.rv.show:not([data-own-reveal]){animation-name:rvCardFlat}
+@keyframes rvCard{from{opacity:0;transform:translateY(26px);clip-path:inset(14% 7% 14% 7% round 30px)}
+  to{opacity:1;transform:none;clip-path:inset(-90px -50px -90px -50px round 22px)}}
+@keyframes rvCardFlat{from{opacity:0;clip-path:inset(14% 7% 14% 7% round 30px)}
+  to{opacity:1;clip-path:inset(-90px -50px -90px -50px round 22px)}}
+
+/* ---- headings: words rise and un-blur; matras are never clipped (no overflow mask) ---- */
+html.rvjs .rvs:not(.show) .sc{opacity:0}
+html.rvjs .rvs.show .sc{animation:wordIn 1s var(--ease-out) calc(var(--rv-d,0s) + var(--i) * 70ms) backwards}
+html.rvjs.rv-lite .rvs.show .sc{animation-name:wordInLite}
+@keyframes wordIn{from{opacity:0;transform:translateY(.45em);filter:blur(6px)}to{filter:blur(0)}}
+@keyframes wordInLite{from{opacity:0;transform:translateY(.45em)}}
+/* the eyebrow underline draws after its words have landed */
+.rvs.eyebrow::after{width:60%;left:20%;transition:none;transform-origin:50% 50%}
+html.rvjs .rvs.eyebrow:not(.show)::after{opacity:0}
+html.rvjs .rvs.eyebrow.show::after{animation:eyeLine 1s var(--ease-out) calc(var(--rv-d,0s) + var(--n,1) * 70ms + .35s) backwards}
+@keyframes eyeLine{from{opacity:0;transform:scaleX(0)}}
+
+/* ---- ornament divider ---- */
+.orn{display:block;width:min(190px,56vw);height:auto;margin:0 auto 20px;overflow:visible;pointer-events:none}
+.orn .ln{fill:none;stroke:var(--gold);stroke-width:1.1;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+.orn .l2{stroke-width:.7;opacity:.6}
+.orn .base{stroke-width:.9}
+.orn .dot{fill:var(--gold)}
+.orn .pt{stroke:var(--gold);stroke-width:.7;stroke-linejoin:round;transform-box:view-box;transform-origin:110px 24px;transform:rotate(var(--a))}
+.orn .k0{fill:rgba(139,30,63,.78)}.orn .k1{fill:var(--saffron)}.orn .k2{fill:var(--marigold)}
+html.rvjs .orn:not(.on) :is(.ln,.pt,.dot){opacity:0}
+html.rvjs .orn.on .ln{animation:ornDraw 1.5s var(--ease-out) backwards}
+html.rvjs .orn.on .l2{animation-delay:.15s}
+html.rvjs .orn.on .base{animation-delay:.55s}
+html.rvjs .orn.on .pt{animation:ornBloom 1.1s var(--ease-spring) calc(.45s + var(--k) * .09s) backwards}
+html.rvjs .orn.on .dot{animation:ornDot .6s ease-out 1.1s backwards}
+@keyframes ornDraw{from{stroke-dashoffset:1}}
+@keyframes ornBloom{from{opacity:0;transform:rotate(0deg) scale(.15)}to{opacity:1;transform:rotate(var(--a)) scale(1)}}
+@keyframes ornDot{from{opacity:0}}
+
+/* ---- scroll progress: thin gold line, marigold head ---- */
+.sprog{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:3px;z-index:250;pointer-events:none;opacity:0;transition:opacity .9s var(--ease-out)}
+.sprog.on{opacity:1}
+.sp-line{position:absolute;left:0;top:0;width:100%;height:2px;transform-origin:0 50%;transform:scaleX(0);will-change:transform;
+  background:linear-gradient(90deg,rgba(200,146,31,.15),var(--gold) 30%,var(--marigold))}
+.sp-head{position:absolute;left:-4px;top:-2px;width:8px;height:8px;border-radius:50%;will-change:transform;
+  background:radial-gradient(circle,#fff4c2 15%,var(--marigold) 55%,rgba(244,163,0,0) 72%);box-shadow:0 0 8px 2px rgba(244,163,0,.55);
+  animation:diya 2.6s ease-in-out infinite alternate}
+@keyframes diya{from{opacity:.75}to{opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  .orn *,.sp-head{animation:none!important}
+  .orn :is(.ln,.pt,.dot){opacity:1!important}
+  .rvs .sc{opacity:1!important}
+}
+html.failsafe .orn *,html.failsafe .rvs .sc{animation:none!important;opacity:1!important}
+html.failsafe :is(.rv,.rv-left,.rv-right,.rv-scale){animation:none!important;clip-path:none!important}
